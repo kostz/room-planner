@@ -28,7 +28,7 @@ type RoomPlanner struct {
 }
 
 func NewRoomPlanner(fileName string) *RoomPlanner {
-	fp := &RoomPlanner{
+	rp := &RoomPlanner{
 		floorPlan: nil,
 		rooms:     make(map[string]RoomChairs),
 		roomPos:   make(map[string]string),
@@ -41,12 +41,12 @@ func NewRoomPlanner(fileName string) *RoomPlanner {
 		},
 	}
 
-	if err := fp.readFloorPlan(fileName); err != nil {
+	if err := rp.readFloorPlan(fileName); err != nil {
 		log.Errorf("Can't read file %s, %s", fileName, err)
 		return nil
 	}
 
-	return fp
+	return rp
 }
 
 func (rp *RoomPlanner) readFloorPlan(fileName string) error {
@@ -222,11 +222,11 @@ func (rp *RoomPlanner) print() {
 }
 
 func main() {
-	if len(os.Args) != 1 {
+	if len(os.Args) != 2 {
 		panic(fmt.Errorf("USAGE: room-planner <floor plan file>"))
 	}
 
-	rp := NewRoomPlanner(os.Args[0])
+	rp := NewRoomPlanner(os.Args[1])
 	rp.traverse()
 	rp.print()
 }

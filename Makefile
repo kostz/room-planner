@@ -1,10 +1,9 @@
 TARGET ?= room-planner
 
-build: build/$(TARGET)
+build: fmt lint test build/$(TARGET)
 
 build/$(TARGET): $(SOURCES)
-	go build -o build/ -ldflags "-s"
-
+	go build -o build/
 test:
 	go test -race -timeout=10s ./...
 
